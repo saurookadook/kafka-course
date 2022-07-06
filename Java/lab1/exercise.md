@@ -37,6 +37,7 @@ Note: You can use POSTman or any other REST request facility tooling with the Op
     	This will create a topic of 1 replica and 1 partition
 
 2'- Verify from the REST API that the topic was created.
+_- **NOTE**: make sure `baseUrl` variable doesn't have trailing `/`_
 
 3- You will be provided a prompt. Using these prompts, enter a word and hit ENTER, add some more words and hit ENTER
 
@@ -63,7 +64,31 @@ Note: You can use POSTman or any other REST request facility tooling with the Op
 
 6-Enter some more words in the producer, and view the messages in the terminal with the consumer
 
-7- Go to the documentation for kafka-console-producer.bat and kafka-console-consumer.bat  and research how you can produce a key and value on the command line, and read that key and value on the consumer. You may need to shut down either kafka-console-producer, kafka-console-consumer.bat  or both with CTRL+C and try something different.
+7- Go to the documentation for `kafka-console-producer.bat` and `kafka-console-consumer.bat` _(or `kafka-console-producer.sh` and `kafka-console-consumer.sh`)_ and research how you can produce a key and value on the command line, and read that key and value on the consumer. You may need to shut down either kafka-console-producer, kafka-console-consumer.bat  or both with CTRL+C and try something different.
+
+---
+**NOTES**
+
+[Console Producer and Consumer Basics](https://developer.confluent.io/tutorials/kafka-console-consumer-producer-basics/kafka.html)
+
+```sh
+# CONSOLE PRODUCER
+kafka-console-producer \
+  --topic orders \
+  --bootstrap-server broker:9092 \
+  --property parse.key=true \
+  --property key.separator=":"
+
+# CONSOLE CONSUMER
+kafka-console-consumer \
+  --topic orders \
+  --bootstrap-server broker:9092 \
+  --from-beginning \
+  --property print.key=true \
+  --property key.separator="-"
+```
+
+---
 
 8- Shut down kafka-console-producer.sh and kafka-console-consumer.sh by using CTRL+C
 
