@@ -1,6 +1,20 @@
-{"version":1,
-    "partitions":[
-       {"topic":"my_orders","partition":0,"replicas":[1,2]},
-       {"topic":"my_orders","partition":1,"replicas":[1,2]},
-       {"topic":"my_orders","partition":2,"replicas":[2]}
-  ]}
+{
+    "version": 1,
+    "partitions": [
+       {
+            "topic": "my_orders",
+            "partition": 0,
+            "replicas": [1,2]
+        },
+        {
+            "topic": "my_orders",
+            "partition": 1,
+            "replicas": [1,2]
+        },
+        {
+            "topic": "my_orders",
+            "partition": 2,
+            "replicas": [2]
+        }
+    ]
+}
