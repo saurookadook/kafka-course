@@ -82,7 +82,7 @@ const run = async () => {
     await Promise.allSettled(producerMessages)
         .then((results) => {
             console.log('results: ', results)
-            resp.forEach((singleResult) => {
+            results.forEach((singleResult) => {
                 console.log('status: ', singleResult.status);
                 console.log('value: ', singleResult.value);
             });

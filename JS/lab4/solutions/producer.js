@@ -22,7 +22,7 @@ const createMessage = (disaster, num) => ({
   value: `${num}`,
 })
 const sendMessage = () => {
-  topic = typesOfDisasters[Math.floor(Math.random()*typesOfDisasters.length)];
+  const topic = typesOfDisasters[Math.floor(Math.random()*typesOfDisasters.length)];
   console.log(`Sending to topic ${topic}`);
   return producer
     .send({

@@ -6,18 +6,19 @@
 docker-compose up -d
 ```
 
-
 1- Start from the previous lab copying the exercise folder to the exercise folder in this lab
 
+```sh
+cp -R ../lab3/exercise ./
 ```
-cp -R ../lab3/exercise exercise
-```
 
-Note: In Windows do it with `copy` instead of `cp` and `\` instead of `/`.
+_Note: In Windows do it with `copy` instead of `cp` and `\` instead of `/`._
 
-Now run `mvn clean compile`
+~~Now run `mvn clean compile`~~
 
-2- Go to kafka folder and run kafka-topics
+1a- Rename `index.js` to `producer.js`
+
+2- Go to kafka folder and run `kafka-topics`:
 
 *Windows*
 
@@ -41,15 +42,60 @@ Now run `mvn clean compile`
 
 3- Adapt the Producer to produce randomly to any of the two topics above with an intensity of the disaster between 1 and 10 and key the topic as well.
 
-4- Create a consumer called Consumer that takes as argument the topic to consume to. Make each consumer in the same consumer group.
+4- Add a `consumer.js` file and create a consumer in it that includes the topic to consume to in its `groupId`. ~~Make each consumer in the same consumer group.~~
 
-5- Start 2 consumers for hurricanes and 1 consumer for flood
+5- Start 2 consumers for `hurricane` and 1 consumer for `flood`
 
-These can be in 3 seperate tabs.
+_These can be in 3 seperate tabs._
+
+> Just run `node exercise/consumer.js --topic <topic_name>` in each tab, substituting
+> `<topic_name>` with `hurricane` in the first 2 and `flood` in the last one
+
+~~*Windows*~~
+
+~~```~~
+~~./bin/windows/kafka-console-consumer.bat \~~
+~~  --bootstrap-server localhost:9092 \~~
+~~  --topic hurricane --from-beginning \~~
+~~  --key-deserializer org.apache.kafka.common.serialization.StringDeserializer \~~
+~~  --value-deserializer org.apache.kafka.common.serialization.StringDeserializer \~~
+~~  --property print.key=true \~~
+~~  --property key.separator=,~~
+
+~~./bin/windows/kafka-console-consumer.bat \~~
+~~  --bootstrap-server localhost:9092 \~~
+~~  --topic flood --from-beginning \~~
+~~  --key-deserializer org.apache.kafka.common.serialization.StringDeserializer \~~
+~~  --value-deserializer org.apache.kafka.common.serialization.StringDeserializer \~~
+~~  --property print.key=true \~~
+~~  --property key.separator=,~~
+~~```~~
+
+~~*Unix*~~
+
+~~```~~
+~~./bin/kafka-console-consumer.sh \~~
+~~  --bootstrap-server localhost:9092 \~~
+~~  --topic hurricane --from-beginning \~~
+~~  --key-deserializer org.apache.kafka.common.serialization.StringDeserializer \~~
+~~  --value-deserializer org.apache.kafka.common.serialization.StringDeserializer \~~
+~~  --property print.key=true \~~
+~~  --property key.separator=", "~~
+
+~~./bin/kafka-console-consumer.sh \~~
+~~  --bootstrap-server localhost:9092 \~~
+~~  --topic flood --from-beginning \~~
+~~  --key-deserializer org.apache.kafka.common.serialization.StringDeserializer \~~
+~~  --value-deserializer org.apache.kafka.common.serialization.StringDeserializer \~~
+~~  --property print.key=true \~~
+~~  --property key.separator=", "~~
+~~```~~
 
 6- Run the producer: `node producer.js`
 
 7- Verify each correct consumer got the correct message. Did all consumer got the same amount of messages? What happened? How can we balance this?
+
+> They did not, though I can't remember how to rebalance them lol
 
 8- Kill the Consumer on the hurricane topic and start another one on the flood topic. Check the logs for the partition rebalance.
 
