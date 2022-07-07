@@ -64,7 +64,7 @@ String stateString =
   --key-deserializer org.apache.kafka.common.serialization.StringDeserializer \
   --value-deserializer org.apache.kafka.common.serialization.StringDeserializer \
   --property print.key=true \
-  --property key.separator=,
+  --property key.separator=", "
 ```
 
 10- Shut down everything:
