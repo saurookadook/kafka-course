@@ -6,15 +6,9 @@ const kafka = new Kafka({
     // NOTE: needed to use `LISTENER_HOST`s from `docker-compose.yaml`
     // brokers: ['localhost:29092', 'localhost:29093']
     // brokers: ['broker-1:29092', 'broker-2:29093']
-})
+});
 
-const producer = kafka.producer({ createPartitioner: Partitioners.LegacyPartitioner })
-
-// const consumers = [
-//     kafka.consumer({ groupId: 'hurricane' }),
-//     kafka.consumer({ groupId: 'hurricane' }),
-//     kafka.consumer({ groupId: 'flood' })
-// ];
+const producer = kafka.producer({ createPartitioner: Partitioners.LegacyPartitioner });
 
 const DISASTER_TOPICS = ['hurricane', 'flood'];
 
@@ -24,7 +18,7 @@ const stateString = "AK,AL,AZ,AR,CA,CO,CT,DE,FL,GA," +
                     "NM,NY,NC,ND,OH,OK,OR,PA,RI,SC," +
                     "SD,TN,TX,UT,VT,VA,WA,WV,WI,WY";
 
-const statesArray = stateString.split(',')
+const statesArray = stateString.split(',');
 
 function getRandomInt(max) {
     return Math.floor(Math.random() * max);
@@ -35,7 +29,7 @@ function getRandomState() {
 }
 
 function getRandomBetween1and10() {
-    const randomInt = getRandomInt(11)
+    const randomInt = getRandomInt(11);
     return randomInt || 1;
 }
 
@@ -51,7 +45,7 @@ const getSleep = () => getRandomBetween5and30() * 100;
 // TODO: probably a better way to determine producer vs consumer
 function handleCaughtException(e, source) {
     console.error(`[disaster-example/${source}] ${e.message}`, e);
-};
+}
 
 function sendMessage({
     producer,
@@ -59,7 +53,7 @@ function sendMessage({
     state,
     intensity
 }) {
-    console.log(`Sending message for ${disaster} in ${state}...`)
+    console.log(`Sending message for ${disaster} in ${state}...`);
     return producer.send({
         topic: disaster,
         messages: [
@@ -68,7 +62,7 @@ function sendMessage({
                 value: `disaster of ${disaster} with intensity of ${intensity}`
             }
         ]
-    })
+    });
 }
 
 const run = async () => {
@@ -90,7 +84,7 @@ const run = async () => {
                 return process.exit(1)
             }
         });
-    }, getSleep())
+    }, getSleep());
 };
 
 run().catch((e) => handleCaughtException(e, 'run'));
