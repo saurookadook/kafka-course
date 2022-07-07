@@ -40,7 +40,7 @@ docker-compose up -d
 
 4- Discuss how these changes affect the throuput and create a LowThroughputProducer accordingly. You should get a difference of 5x.
 
-5- Do accordingly with a LowLatency and HighLatency Producers. You may use the LatencyCalculator.java consumer as a helper to calculate the Latency. 
+5- Do accordingly with a LowLatency and HighLatency Producers. You may use the LatencyCalculator.java consumer as a helper to calculate the Latency.
 
 6- Shut down everything:
 
