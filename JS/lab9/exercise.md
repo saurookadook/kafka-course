@@ -6,7 +6,7 @@
 docker-compose up -d
 ```
 
-1- Copy the directory structure we had in the previous labs 
+1- Copy the directory structure we had in the previous labs
 
 2- Go to kafka folder and run kafka-topics
 
