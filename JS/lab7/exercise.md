@@ -6,6 +6,9 @@
 docker-compose up -d
 ```
 
+Accepted configs: https://kafka.apache.org/documentation/#brokerconfigs
+- _in `docker-compose.yaml`, `advertised.listeners` becomes `KAFKA_ADVERTISED_LISTENERS`_
+
 1- Modify the docker-compose file to have the following deployment:
 
 - 5 brokers, and configure the racks such that they group 3/1/1
@@ -17,11 +20,35 @@ Ensure that the brokers have a reliable configuration at the broker level.
 - One to have the most reliable configuration
 - Another one to represent a less reliable configuration
 
-This is a traditional setup where in general you may default to being reliable, but for some topics you can choose to prioritize performance over durability
+This is a traditional setup where, in general, you may default to being reliable but you can choose to prioritize performance over durability for some topics
+
+> *Windows*
+>
+> ```
+> ./bin/windows/kafka-topics.bat --create --bootstrap-server localhost:9092 \
+> --replication-factor 3 --partitions 3 --topic ol_reliable
+>
+> ./bin/windows/kafka-topics.bat --create --bootstrap-server localhost:9092 \
+> --replication-factor 3 --partitions 3 \
+> --config unclean.leader.election.enable=false min.insync.replicas=1
+> --topic basically_covfefe
+> ```
+>
+> *Unix*
+>
+> ```
+> ./bin/kafka-topics.sh --create --bootstrap-server localhost:9092 \
+> --replication-factor 3 --partitions 3 --topic ol_reliable
+>
+> ./bin/kafka-topics.sh --create --bootstrap-server localhost:9092 \
+> --replication-factor 3 --partitions 3 \
+> --config unclean.leader.election.enable=false min.insync.replicas=1
+> --topic basically_covfefe
+> ```
 
 3- For each topic create a Producer and Consumer that ensures the reliability of the whole system
 
-4- Test the system. 
+4- Test the system.
 
 Although it is difficult to force the situation of putting down a broker **just** before the followers read the message, we will try to simulate some scenarios.
 
