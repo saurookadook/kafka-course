@@ -46,7 +46,7 @@ Such that the Intensity Schema is:
 
 You can use the model on this same folder `DisasterValue.asvc`
 
-4- Create a register_schema script that actually registers the schema into the schema registry. I recommend using @kafkajs/confluent-schema-registry. The subject will end up being `namespace.name`.
+4- Create a register_schema script that actually registers the schema into the schema registry. I recommend using @kafkajs/confluent-schema-registry. The subject will end up being `namespace.name`. _(for example, `"com.honolulu.model.DisasterValue"`)_
 Validate by hitting its REST endpoint
 
 5- Create a DisasterProducer that sends DisasterValues into the disasters topic. You can use KafkaAvro client that specifies the URL for the Schema Registry

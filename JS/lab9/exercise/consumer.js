@@ -1,29 +1,25 @@
-const { Kafka, logLevel } = require('kafkajs')
+const { Kafka, logLevel } = require('kafkajs');
+const { KafkaAvro } = require('kafkajs-avro');
+const { handleCaughtException } = require('../../_common');
 
-const kafka = new Kafka({
-    brokers: [
-        'localhost:9092',
-        'localhost:9093',
-        'localhost:9094',
-        'localhost:9095',
-        'localhost:9096'
-    ],
-    clientId: 'lab7-consumer',
+const kafka = new KafkaAvro({
+    avro: {
+        url: "http://localhost:8081"
+    },
+    brokers: ['localhost:9092', 'localhost:9093'],
+    clientId: 'lab9-consumer',
     logLevel: logLevel.DEBUG
-})
+});
 
 const argv = require('minimist')(process.argv.slice(2));
 const topic = argv["topic"];
+
 if (topic === undefined) {
   console.log("Topic must be set as parameter --topic")
   process.exit(1);
 }
 
-const consumer = kafka.consumer({ groupId: `lab7-consumer-${topic}` })
-
-function handleCaughtException(e, source) {
-    console.error(`[reliability-example/${source}] ${e.message}`, e);
-};
+const consumer = kafka.avro.consumer({ groupId: `lab9-consumer-${topic}` });
 
 const run = async () => {
     await consumer.connect()
@@ -36,4 +32,6 @@ const run = async () => {
     });
 }
 
-run().catch(e => handleCaughtException(e, 'consumer'))
+run()
+    .then(() => console.log('Done! :]'))
+    .catch(e => handleCaughtException(e, 'consumer'));

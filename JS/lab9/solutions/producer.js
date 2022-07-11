@@ -14,7 +14,7 @@ const typesOfDisasters = ['flood', 'hurricane']
 
 const getIntensity = () => Math.floor(Math.random()* 10)
 const recommendationsDict = {
-  flood: ["turn off lights", "evacuate"],  
+  flood: ["turn off lights", "evacuate"],
   hurricane: ["run"]
 }
 const scalesDict = {
@@ -35,10 +35,10 @@ const createMessage = (disaster, intensity, scale, recommendations) => ({
 })
 
 const sendMessage = () => {
-  intensity = getIntensity()
-  disaster = typesOfDisasters[Math.floor(Math.random()*typesOfDisasters.length)]
-  recommendationToGive = recommendationsDict[disaster]
-  scale = scalesDict[disaster]
+  const intensity = getIntensity()
+  const disaster = typesOfDisasters[Math.floor(Math.random()*typesOfDisasters.length)]
+  const recommendationToGive = recommendationsDict[disaster]
+  const scale = scalesDict[disaster]
   return producer
     .send({
       topic,
