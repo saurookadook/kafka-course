@@ -9,6 +9,9 @@ docker-compose up -d
 
 1- Go to kafka folder and run kafka-topics
 
+`cleanup.policy=compact` means only saving the latest values
+- sort of like a garbage collector algorithm?
+
 *Windows*
 
 ```
@@ -74,11 +77,10 @@ Homework: Test with the ElasticSearch connector and the following config:
 
 ```
   "connector.class": "io.confluent.connect.elasticsearch.ElasticsearchSinkConnector",
-  "tasks.max": "4", 
-  "topics": "honolulu-topic", 
-  "key.ignore": "true", "schema.ignore": "true", 
-  "connection.url": "http://elasticsearch:9200", 
-  "type.name": "kafka-connect", 
+  "tasks.max": "4",
+  "topics": "honolulu-topic",
+  "key.ignore": "true", "schema.ignore": "true",
+  "connection.url": "http://elasticsearch:9200",
+  "type.name": "kafka-connect",
   "name": "elasticsearch-connector"
 ```
-  
