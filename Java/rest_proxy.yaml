@@ -303,7 +303,7 @@ paths:
               oneOf:
               - $ref: '#/components/schemas/topic_subscription'
               - $ref: '#/components/schemas/topic_pattern_subscription'
-              
+
       responses:
         404:
           description: 40403 -- Consumer instance not found
