@@ -1,4 +1,4 @@
-## Lab 7
+## Lab 10
 
 0- In this folder run:
 
@@ -7,9 +7,9 @@ docker-compose up -d
 ```
 
 
-1- Copy the directory structure we had in the previous labs and the `pom.xml`
+1- Copy the directory structure we had in the previous labs ~~and the `pom.xml`~~
 
-Now run `mvn clean compile`
+~~Now run `mvn clean compile`~~
 
 2- Go to kafka folder and run kafka-topics
 
@@ -43,7 +43,7 @@ bin/windows/connect-standalone.bat worker.properties filesink.properties
 bin/connect-standalone.sh worker.properties filesink.properties
 ```
 
-5- Execute the producer sending some log data. 
+5- Execute the producer sending some log data.
 
 6- Verify the logs are effectively in the file specified
 
@@ -54,4 +54,3 @@ docker-compose down
 ```
 
 
-  
