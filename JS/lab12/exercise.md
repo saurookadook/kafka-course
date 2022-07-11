@@ -6,9 +6,23 @@
 docker-compose up -d
 ```
 
-1- Copy the directory structure we had in the previous labs and the `pom.xml` from this directory
+1- Copy the directory structure we had in the previous labs ~~and the `pom.xml` from this directory~~
 
-Now run `mvn clean compile`
+~~Now run `mvn clean compile`~~
+
+*Windows*
+
+```
+./bin/windows/kafka-topics.bat --create --bootstrap-server localhost:9092 \
+--replication-factor 2 --partitions 3 --topic RawTempHeadings
+```
+
+*Unix*
+
+```
+./bin/kafka-topics.sh --create --bootstrap-server localhost:9092 \
+--replication-factor 2 --partitions 3 --topic RawTempHeadings
+```
 
 2- Copy the Producer from lab 4 and tweak it so that it sends messages continuously into a topic `RawTempReadings`.
 
